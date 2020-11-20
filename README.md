@@ -5,5 +5,5 @@ Please develop your server code in the directory [pta-server]. The user list tha
 
 Your server code will be evaluated through an automatic testing client. This way, in order to test your code you can use the [pta-client.py] file. This file makes some tests but it is not an extensive test. So, keep in mind that the actual evaluation will test other aspects of your code.
 
-You could use **any programming language**. But you must provide instructions in order to successfully run your code. Describe all stuff about libraries, interpreters, versions and so on. After finishing development, you must share the link of your github repo in the evaluation environment ([ava.ufrpe.br](https://ava.ufrpe.br/)).
+You could use **any programming language**. But you must provide instructions in order to successfully run your code. Describe all stuff about libraries, interpreters, versions and so on. After finishing development, you must share the link of your github repo in the evaluation environment ([ava.ufrpe.br](http://ava.ufrpe.br/)).
 
