@@ -7,7 +7,7 @@ Your server code will be evaluated through an automatic testing client. This way
 
 You could use **any programming language**. But you must provide instructions in order to successfully run your code. Describe all stuff about libraries, interpreters, versions and so on. After finishing development, you must share the link of your github repo in the evaluation environment ([ava.ufrpe.br](http://ava.ufrpe.br/)).
 
-[ptas]: <https://github.com/glaucogoncalves/pta/pta-server>
-[ptau]: <https://github.com/glaucogoncalves/pta/pta-server/users.txt>
-[ptaa]: <https://github.com/glaucogoncalves/pta/pta-server/files>
-[ptac]: <https://github.com/glaucogoncalves/pta/pta-client.py>
+[ptas]: <https://github.com/glaucogoncalves/pta/tree/master/pta-server>
+[ptau]: <https://github.com/glaucogoncalves/pta/tree/master/pta-server/users.txt>
+[ptaa]: <https://github.com/glaucogoncalves/pta/tree/master/pta-server/files>
+[ptac]: <https://github.com/glaucogoncalves/pta/tree/master/pta-client.py>
