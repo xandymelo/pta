@@ -12,6 +12,7 @@ serverSocket.listen(1)
 print("CUMP")
 aux = float("inf")
 verify_client = False
+apresentacao = True
 
 while 1:
     try:
@@ -22,18 +23,22 @@ while 1:
         if aux == float("inf"):
             aux = sentence[0]
         else:
-            aux += 1
+            aux = int(aux) + 1
+        if apresentacao == True and sentence[1] != "CUMP":
+            capitalizedSentence = '{} NOK'.format(aux)
+            connectionSocket.send(capitalizedSentence.encode('ascii'))
+            break
         capitalizedSentence = '{} NOK'.format(aux)
         if sentence[1] == "CUMP":
-            capitalizedSentence = '{} NOK'.format(aux)
             try:
                 arquivo = open('users.txt','r')
                 for lines in arquivo:
                     lines2 = lines.rstrip() #retirar o /n
                     if  lines2 == sentence[2]:
                         capitalizedSentence = '{} OK'.format(aux)
+                verify_client = True
             except:
-                continue
+                pass
         elif sentence[1] == 'TERM':
             capitalizedSentence = '{} OK'.format(aux)
             verify_client = True
@@ -48,8 +53,8 @@ while 1:
                 result2 = "{} {}{}".format(capitalizedSentence,result[0],".")
                 capitalizedSentence = result2
             except:
-                continue
-        elif sentence[0] == 'PEGA':
+                pass
+        elif sentence[1] == 'PEGA':
             path = r"\Users\Alexandre\Documents\GitHub\pta\pta-server\files"
             chdir(path)
             try:
@@ -58,7 +63,7 @@ while 1:
             except:
                 continue
 
-
+        apresentacao = False
         connectionSocket.send(capitalizedSentence.encode('ascii'))    
         if verify_client == True:    
             break
