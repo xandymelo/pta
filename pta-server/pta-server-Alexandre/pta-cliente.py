@@ -1,5 +1,12 @@
 from socket import socket, AF_INET, SOCK_STREAM
 
+def retornoservidor():
+    #Aguarda mensagem de retorno e a imprime
+    modifiedMessage, addr = clientSocket.recvfrom(2048)
+    print("Retorno do Servidor:",modifiedMessage.decode())
+    return modifiedMessage
+
+
 #serverName = '127.0.0.1'
 serverName = '127.0.0.1'
 serverPort = 11500
@@ -12,13 +19,6 @@ clientSocket.connect((serverName,serverPort))
 message = input('Digite um comando: ')
 clientSocket.send(message.encode('ascii'))
 
-#Aguarda mensagem de retorno e a imprime
-modifiedMessage, addr = clientSocket.recvfrom(2048)
-print("Retorno do Servidor:",modifiedMessage.decode())
-
-if modifiedMessage.decode() == 'OK':
-    message = input('Digite seu usuario: ')
-    clientSocket.send(message.encode('ascii'))
-
+modifiedMessage = retornoservidor()
 
 clientSocket.close()

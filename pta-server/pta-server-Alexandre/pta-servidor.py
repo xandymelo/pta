@@ -1,4 +1,6 @@
 from socket import *
+from os import listdir,chdir,open
+from os.path import isfile, join
 
 serverPort = 11500
 #Cria o Socket TCP (SOCK_STREAM) para rede IPv4 (AF_INET)
@@ -8,40 +10,60 @@ serverSocket.bind(('',serverPort))
 serverSocket.listen(1)
 
 print("CUMP")
-
+aux = float("inf")
 verify_client = False
-aux = 0.
 
 while 1:
     try:
         connectionSocket, addr = serverSocket.accept()
         sentence = connectionSocket.recv(1024).decode() #converter para string novamente
         #VERIFICAR SE A PRIMEIRA MENSAGEM É 'CUMP'
-        if sentence != "CUMP" and aux == 0:
-            capitalizedSentence = 'NOK'
+        sentence = sentence.split(" ")
+        if aux == float("inf"):
+            aux = sentence[0]
         else:
-            capitalizedSentence = 'OK'
-        #VERIFICAÇÃO DE USUÁRIO
-        if aux == 1:
-            aux2 = 0
-            arquivo = open('users.txt','r')
-            for lines in arquivo:
-                if lines == sentence:
-                    aux2 = 1
-            if aux2 == 0:
-                capitalizedSentence = 'NOK'
-            else:
-                capitalizedSentence = 'OK'
-        aux += 1
-        connectionSocket.send(capitalizedSentence.encode('ascii'))
+            aux += 1
+        capitalizedSentence = '{} NOK'.format(aux)
+        if sentence[1] == "CUMP":
+            capitalizedSentence = '{} NOK'.format(aux)
+            try:
+                arquivo = open('users.txt','r')
+                for lines in arquivo:
+                    lines2 = lines.rstrip() #retirar o /n
+                    if  lines2 == sentence[2]:
+                        capitalizedSentence = '{} OK'.format(aux)
+            except:
+                continue
+        elif sentence[1] == 'TERM':
+            capitalizedSentence = '{} OK'.format(aux)
+            verify_client = True
+        elif sentence[1] == 'LIST':
+            try:
+                path = r"C:\Users\Alexandre\Documents\GitHub\pta\pta-server\files"
+                files = [f for f in listdir(path) if isfile(join(path, f))]
+                leng = len(files)
+                capitalizedSentence = "ARQS {}".format(leng)
+                separator = ','
+                result = [separator.join(files)]
+                result2 = "{} {}{}".format(capitalizedSentence,result[0],".")
+                capitalizedSentence = result2
+            except:
+                continue
+        elif sentence[0] == 'PEGA':
+            path = r"\Users\Alexandre\Documents\GitHub\pta\pta-server\files"
+            chdir(path)
+            try:
+                arq = open(sentence[1],"r")
 
-            
+            except:
+                continue
 
 
+        connectionSocket.send(capitalizedSentence.encode('ascii'))    
+        if verify_client == True:    
+            break
 
-
-
-        connectionSocket.close()
+        
     except (KeyboardInterrupt, SystemExit):
         break
 
