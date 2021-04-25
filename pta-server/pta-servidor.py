@@ -31,9 +31,11 @@ while 1:
             capitalizedSentence = '{} NOK'.format(aux)
             connectionSocket.send(capitalizedSentence.encode('ascii'))
             aux = float("inf")
+        elif apresentacao == True and sentence[1] == "CUMP":
+            apresentacao = False
             
         capitalizedSentence = '{} NOK'.format(aux)
-        if sentence[1] == "CUMP":
+        if sentence[1] == "CUMP" and apresentacao == False:
             try:                
                 for lines in arquivo:
                     lines2 = lines.rstrip() #retirar o /n
@@ -42,10 +44,10 @@ while 1:
                 verify_client = True
             except:
                 pass
-        elif sentence[1] == 'TERM':
+        elif sentence[1] == 'TERM' and apresentacao == False:
             capitalizedSentence = '{} OK'.format(aux)
             verify_client = True
-        elif sentence[1] == 'LIST':
+        elif sentence[1] == 'LIST' and apresentacao == False:
             try:
                 path = r"C:\Users\Alexandre\Documents\GitHub\pta\pta-server\files"
                 files = [f for f in listdir(path) if isfile(join(path, f))]
@@ -53,11 +55,11 @@ while 1:
                 capitalizedSentence = "ARQS {}".format(leng)
                 separator = ','
                 result = [separator.join(files)]
-                result2 = "{} {}{}".format(capitalizedSentence,result[0],".")
+                result2 = "{} {} {}{}".format(aux,capitalizedSentence,result[0],".")
                 capitalizedSentence = result2
             except:
                 pass
-        elif sentence[1] == 'PEGA':
+        elif sentence[1] == 'PEGA' and apresentacao == False:
             path = r"\Users\Alexandre\Documents\GitHub\pta\pta-server\files"
             chdir(path)
             try:
@@ -66,7 +68,6 @@ while 1:
             except:
                 continue
 
-        apresentacao = False
         connectionSocket.send(capitalizedSentence.encode('ascii')) 
 
         
