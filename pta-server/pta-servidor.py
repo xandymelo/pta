@@ -1,6 +1,6 @@
 from socket import *
-from os import listdir,chdir,open
-from os.path import isfile, join
+from os import listdir,chdir,path
+from os.path import isfile, join,dirname,abspath
 
 serverPort = 11500
 #Cria o Socket TCP (SOCK_STREAM) para rede IPv4 (AF_INET)
@@ -13,25 +13,28 @@ print("CUMP")
 aux = float("inf")
 verify_client = False
 apresentacao = True
+arquivo = open('users.txt',"r")
+
 
 while 1:
     try:
         connectionSocket, addr = serverSocket.accept()
         sentence = connectionSocket.recv(1024).decode() #converter para string novamente
-        #VERIFICAR SE A PRIMEIRA MENSAGEM É 'CUMP'
         sentence = sentence.split(" ")
+        #tratamento da contagem de mensagens
         if aux == float("inf"):
             aux = sentence[0]
         else:
             aux = int(aux) + 1
+        
         if apresentacao == True and sentence[1] != "CUMP":
             capitalizedSentence = '{} NOK'.format(aux)
             connectionSocket.send(capitalizedSentence.encode('ascii'))
-            break
+            aux = float("inf")
+            
         capitalizedSentence = '{} NOK'.format(aux)
         if sentence[1] == "CUMP":
-            try:
-                arquivo = open('users.txt','r')
+            try:                
                 for lines in arquivo:
                     lines2 = lines.rstrip() #retirar o /n
                     if  lines2 == sentence[2]:
@@ -64,9 +67,7 @@ while 1:
                 continue
 
         apresentacao = False
-        connectionSocket.send(capitalizedSentence.encode('ascii'))    
-        if verify_client == True:    
-            break
+        connectionSocket.send(capitalizedSentence.encode('ascii')) 
 
         
     except (KeyboardInterrupt, SystemExit):

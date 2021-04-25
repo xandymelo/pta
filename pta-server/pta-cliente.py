@@ -15,10 +15,18 @@ clientSocket = socket(AF_INET, SOCK_STREAM)
 #Conecta ao servidor
 clientSocket.connect((serverName,serverPort))
 
+
 #Recebe mensagem do usuario e envia ao servidor
 message = input('Digite um comando: ')
 clientSocket.send(message.encode('ascii'))
-
 modifiedMessage = retornoservidor()
+modifiedMessage = modifiedMessage.decode()
+
+if modifiedMessage[2:] == 'OK':
+    message = input('Digite um comando: ')
+    clientSocket.send(message.encode('ascii'))
+    modifiedMessage = retornoservidor()
+    modifiedMessage = modifiedMessage.decode()
 
 clientSocket.close()
+
