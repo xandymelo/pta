@@ -16,3 +16,9 @@ You could use **any programming language**. But you must provide instructions in
 
 Para testar o meu servidor pta, basta modificar a variável path, nas linhas 91 e 77 para o caminho do diretório da sua pasta 'files', e pronto!
 Basta rodar o arquivo pta-servidor.py, e depois o pta-client.py.
+
+ - BIBLIOTECAS UTILIZADAS
+ socket
+ os
+ 
+ O programa foi feito em python, na versão 3.9.
