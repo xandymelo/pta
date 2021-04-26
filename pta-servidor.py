@@ -1,5 +1,5 @@
 from socket import *
-from os import listdir,chdir,path
+from os import listdir,chdir,path,stat
 from os.path import isfile, join,dirname,abspath
 from pathlib import Path
 
@@ -83,22 +83,28 @@ while 1:
                         result2 = "{} {} {}".format(aux,capitalizedSentence,result[0])
                         capitalizedSentence = result2
                     except:
-                        aux2 = False
+                        pass
                     enviar(capitalizedSentence)
                     aux = int(aux) + 1
                 elif sentence[1] == 'PEGA':
                     try:
-                       byte = os.stat_result(sentence[2]).st_size
-
-
+                        path = r"C:\Users\Alexandre\Documents\GitHub\pta\files\{}".format(sentence[2])
+                        arq = open(path,'r')
+                        byte = stat(path).st_size
+                        lines = arq.read().rstrip()
+                        capitalizedSentence = '{} {} {} {}'.format(aux,'ARQ',byte,lines)
+                        arq.close()
                     except:
-                        aux2 = False
+                        pass
+
+                    enviar(capitalizedSentence)
+                    aux = int(aux) + 1
                 
                 if aux2 == True:
                     sentence = receber()
+            #-fim
 
-
-        if apresentacao == True:
+        if apresentacao == True or aux2 == False:
             connectionSocket.close()
 
         
