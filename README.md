@@ -11,3 +11,8 @@ You could use **any programming language**. But you must provide instructions in
 [ptau]: <https://github.com/glaucogoncalves/pta/tree/master/pta-server/users.txt>
 [ptaa]: <https://github.com/glaucogoncalves/pta/tree/master/pta-server/files>
 [ptac]: <https://github.com/glaucogoncalves/pta/tree/master/pta-client.py>
+
+------------------------------------------------------------------------------------------------------
+
+Para testar o meu servidor pta, basta modificar a variável path, nas linhas 91 e 77 para o caminho do diretório da sua pasta 'files', e pronto!
+Basta rodar o arquivo pta-servidor.py, e depois o pta-client.py.
