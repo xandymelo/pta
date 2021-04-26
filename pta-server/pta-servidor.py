@@ -74,7 +74,7 @@ while 1:
                     aux2 = False
                 elif sentence[1] == 'LIST':
                     try:
-                        path = r"C:\Users\Alexandre\Documents\GitHub\pta\files"
+                        path = r"C:\Users\Alexandre\Documents\GitHub\pta\pta-server\files"
                         files = [f for f in listdir(path) if isfile(join(path, f))]
                         leng = len(files)
                         capitalizedSentence = "ARQS {}".format(leng)
@@ -88,7 +88,7 @@ while 1:
                     aux = int(aux) + 1
                 elif sentence[1] == 'PEGA':
                     try:
-                        path = r"C:\Users\Alexandre\Documents\GitHub\pta\files\{}".format(sentence[2])
+                        path = r"C:\Users\Alexandre\Documents\GitHub\pta\pta-server\files\{}".format(sentence[2])
                         arq = open(path,'r')
                         byte = stat(path).st_size
                         lines = arq.read().rstrip()
