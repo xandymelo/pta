@@ -1,7 +1,6 @@
 from socket import *
 from os import listdir,chdir,path,stat
 from os.path import isfile, join,dirname,abspath
-from pathlib import Path
 
 def cump(user,aux):
     arquivo = open('users.txt',"r")
