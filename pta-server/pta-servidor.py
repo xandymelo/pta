@@ -49,7 +49,6 @@ while 1:
         if apresentacao == True:
             if sentence[1] != "CUMP":
                 capitalizedSentence = '{} NOK'.format(aux)
-                aux = float("inf")
             elif sentence[1] == "CUMP":
                 capitalizedSentence = cump(sentence[2],aux)
             connectionSocket.send(capitalizedSentence.encode('ascii'))
@@ -57,8 +56,6 @@ while 1:
                 apresentacao = False
                 sentence = receber()
                 aux = int(aux) + 1
-            else:
-                aux = float("inf")
         #--fim
 
         #--inicio do tratamento depois da confirmação do usuario
@@ -69,7 +66,6 @@ while 1:
                 if sentence[1] == 'TERM':
                     capitalizedSentence = '{} OK'.format(aux)
                     enviar(capitalizedSentence)
-                    aux = float("inf")
                     aux2 = False
                 elif sentence[1] == 'LIST':
                     try:
@@ -104,6 +100,7 @@ while 1:
             #-fim
 
         if apresentacao == True or aux2 == False:
+            aux = float("inf")
             connectionSocket.close()
 
         
